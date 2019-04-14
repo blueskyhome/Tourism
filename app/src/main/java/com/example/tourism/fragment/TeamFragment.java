@@ -42,6 +42,7 @@ public class TeamFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.team_fragment, null);
+        teamList.clear();
         initData();
         initView(view);
         return view;

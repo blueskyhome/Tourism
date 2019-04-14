@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tourism.R;
+import com.example.tourism.tools.ActivityCollector;
 import com.example.tourism.tools.Global;
 import com.example.tourism.tools.MyDatabaseHelper;
 
