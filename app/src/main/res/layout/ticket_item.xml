@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ticket_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    android:background="@drawable/team_item_border">
+
+    <ImageView
+        android:id="@+id/ticket_img"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:focusableInTouchMode="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/team_item_test" />
+    <TextView
+        android:id="@+id/ticket_title"
+        android:text="狮子林"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/ticket_context"
+        android:layout_margin="5dp"
+        android:text="简介：武夷山，武夷山位于江西与福建西北部两省交界处，武夷山脉北段东南麓总面积999.75平方公里，是中国著名的风景旅游区和避暑胜地。属典型的丹霞地貌，是首批国家级重点风景名胜区之一。"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical">
+        <ImageView
+            android:src="@drawable/team_item_money"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+        <TextView
+            android:text="门票："
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/ticket_price"
+            android:text="2000"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="元"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

@@ -94,11 +94,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void login() {
         if (!Global.isManager) {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.query("Account", new String[]{"account, password"}, "account=?", new String[]{accountText.getText().toString()}, null, null, null);
+            Cursor cursor = db.query("Account", new String[]{"account, password", "name"}, "account=?", new String[]{accountText.getText().toString()}, null, null, null);
             save();
             if (cursor.moveToNext()) {
                 password = cursor.getString(cursor.getColumnIndex("password"));
+                Global.userName = cursor.getString(cursor.getColumnIndex("name"));
                 if (password.equals(passwordText.getText().toString())) {
+                    Global.isLogin = true;
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else {
@@ -109,6 +111,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             }
         } else {
             if (Global.managerAccount.equals(accountText.getText().toString()) && Global.managerPassword.equals(passwordText.getText().toString())) {
+                Global.isLogin = true;
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             } else {

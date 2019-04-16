@@ -23,6 +23,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private EditText accountText;
     private EditText passwordText;
     private EditText checkPasswordText;
+    private EditText nameText;
     private MyDatabaseHelper dbHelper;
 
     @Override
@@ -38,6 +39,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         registerButton = (Button) findViewById(R.id.register_button);
         accountText = (EditText) findViewById(R.id.register_account);
         passwordText = (EditText) findViewById(R.id.register_password);
+        nameText = (EditText) findViewById(R.id.name);
         checkPasswordText = (EditText) findViewById(R.id.check_password);
         dbHelper = new MyDatabaseHelper(this, "Tourism.db", null, 1);
 
@@ -71,6 +73,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 ContentValues values = new ContentValues();
                 values.put("account", accountText.getText().toString());
                 values.put("password", passwordText.getText().toString());
+                values.put("name", nameText.getText().toString());
                 db.insert("Account", null, values);
                 finish();
             } else {
