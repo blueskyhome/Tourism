@@ -19,7 +19,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
 
     private List<Hotel> mHotelList;
 
-    static class ViewHolder extends TeamAdapter.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView hotelImg;
         private TextView hotelName;
         private TextView hotelContent;
