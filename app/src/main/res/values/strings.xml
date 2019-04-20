@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Tourism</string>
+    <string name="like">点赞</string>
+    <string name="order">立即订购</string>
+    <string name="accommodation">住宿攻略></string>
+    <string name="ticket">门票</string>
+    <string name="evaluation">用户评价</string>
 </resources>
