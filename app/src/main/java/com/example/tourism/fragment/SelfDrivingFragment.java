@@ -35,12 +35,12 @@ public class SelfDrivingFragment extends Fragment {
             "台湾（Taiwan），简称“台”，是中华人民共和国省级行政区，省会台北，位于中国大陆东南海域，东临太平洋，西隔台湾海峡与福建省相望，南界巴士海峡与菲律宾群岛相对。台湾省由中国第一大岛台湾岛和周围属岛以及澎湖列岛两大岛群，共80余个岛屿所组成，总面积3.6万平方公里。"
     };
     private String[] url = new String[]{
-            "http://ww1.sinaimg.cn/large/005T39qaly1g22ab3gxr0j321g19w000.jpg",
+            "http://ww1.sinaimg.cn/large/005T39qaly1g288gi2y2cj31hc0u07wi.jpg",
             "http://ww1.sinaimg.cn/large/005T39qaly1g229g5rr0fj30ku0dw0uq.jpg",
             "http://ww1.sinaimg.cn/large/005T39qaly1g229hevx3lj30sc0f01kx.jpg",
             "http://ww1.sinaimg.cn/large/005T39qaly1g229j6pfs9j30go0b3acr.jpg"
     };
-    private String[] hotel = new String[]{"希尔顿酒店、万达酒店","三亚滨海酒店","川枫酒店、特色民宿","台北大酒店，帆船酒店"};
+    private String[] hotel = new String[]{"希尔顿酒店、万达酒店、帝豪酒店","三亚滨海酒店","川枫酒店、特色民宿、五星酒店","台北大酒店、帆船酒店"};
     private int[] money = new int[]{2000,15000,6000,20000};
 
     @Nullable
@@ -61,7 +61,7 @@ public class SelfDrivingFragment extends Fragment {
             team.setCover_url(url[i]);
             team.setHouseText(hotel[i]);
             team.setMoney(money[i]);
-
+            team.setSpot(hotel[i]);
             selfDriveList.add(team);
         }
     }
@@ -69,7 +69,7 @@ public class SelfDrivingFragment extends Fragment {
         recyclerView = (RecyclerView)view.findViewById(R.id.self_drive_recycler);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 1);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new SelfDriveAdapter(selfDriveList);
+        adapter = new SelfDriveAdapter(selfDriveList,getActivity());
         recyclerView.setAdapter(adapter);
     }
 }

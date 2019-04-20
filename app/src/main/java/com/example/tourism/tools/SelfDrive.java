@@ -7,7 +7,7 @@ public class SelfDrive {
     private String title;
     private String cover_url;
     private String houseText;
-    private String[] spot;
+    private String spot;
     private int money;
 
     public int getMoney() {
@@ -26,7 +26,7 @@ public class SelfDrive {
         return title;
     }
 
-    public String[] getSpot() {
+    public String getSpot() {
         return spot;
     }
 
@@ -42,7 +42,7 @@ public class SelfDrive {
         this.money = money;
     }
 
-    public void setSpot(String[] spot) {
+    public void setSpot(String spot) {
         this.spot = spot;
     }
 
