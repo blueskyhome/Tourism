@@ -18,6 +18,11 @@ import android.widget.Toast;
 import com.example.tourism.R;
 import com.example.tourism.tools.Global;
 import com.example.tourism.tools.MyDatabaseHelper;
+import com.example.tourism.tools.User;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.LogInListener;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -93,22 +98,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void login() {
         if (!Global.isManager) {
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.query("Account", new String[]{"account, password", "name"}, "account=?", new String[]{accountText.getText().toString()}, null, null, null);
             save();
-            if (cursor.moveToNext()) {
-                password = cursor.getString(cursor.getColumnIndex("password"));
-                Global.userName = cursor.getString(cursor.getColumnIndex("name"));
-                if (password.equals(passwordText.getText().toString())) {
-                    Global.isLogin = true;
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(this, "请输入正确的账号密码", Toast.LENGTH_SHORT).show();
+            BmobUser.loginByAccount(accountText.getText().toString(), passwordText.getText().toString(), new LogInListener<User>() {
+                @Override
+                public void done(User user, BmobException e) {
+                    if (e == null) {
+                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                        Global.isLogin = true;
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            } else {
-                Toast.makeText(this, "请输入正确的账号密码", Toast.LENGTH_SHORT).show();
-            }
+            });
         } else {
             if (Global.managerAccount.equals(accountText.getText().toString()) && Global.managerPassword.equals(passwordText.getText().toString())) {
                 Global.isLogin = true;

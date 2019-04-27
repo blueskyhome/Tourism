@@ -14,12 +14,13 @@ import com.bumptech.glide.Glide;
 import com.example.tourism.R;
 import com.example.tourism.adapter.AppraseAdapter;
 import com.example.tourism.tools.Apprise;
+import com.example.tourism.tools.Hotel;
 import com.example.tourism.tools.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketDetails extends AppCompatActivity implements View.OnClickListener {
+public class HotelDetails extends AppCompatActivity implements View.OnClickListener{
 
     private Button subtractButton;
     private Button addButton;
@@ -29,10 +30,10 @@ public class TicketDetails extends AppCompatActivity implements View.OnClickList
     private TextView accountMoney;
     private RecyclerView recyclerView;
     private List<Apprise> list = new ArrayList<>();
-    private ImageView ticketUrl;
-    private TextView ticketName;
-    private TextView ticketContent;
-    private Ticket ticket;
+    private ImageView hotelImg;
+    private TextView hotelName;
+    private TextView hotelContent;
+    private Hotel hotel;
 
     private String[] userName = new String[]{"希尔顿酒店","三亚海悦湾度假酒店","万豪国际酒店","三亚文华东方酒店"};
     private String[] userContent = new String[]{
@@ -49,19 +50,18 @@ public class TicketDetails extends AppCompatActivity implements View.OnClickList
             "https://ws1.sinaimg.cn/large/0077HGE3ly1g22ipsdbxrj30d4097t92.jpg"
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ticket_details);
+        setContentView(R.layout.hotel_details);
         initData();
         initView();
     }
 
     private void initView() {
-        ticketUrl = (ImageView) findViewById(R.id.details_img);
-        ticketName = (TextView) findViewById(R.id.details_name);
-        ticketContent = (TextView) findViewById(R.id.details_content);
+        hotelImg = (ImageView) findViewById(R.id.hotel_img);
+        hotelName = (TextView) findViewById(R.id.hotel_name);
+        hotelContent = (TextView) findViewById(R.id.hotel_content);
         subtractButton = (Button) findViewById(R.id.subtract_button);
         addButton = (Button) findViewById(R.id.add_button);
         buyButton = (Button) findViewById(R.id.buy_button);
@@ -74,13 +74,13 @@ public class TicketDetails extends AppCompatActivity implements View.OnClickList
         recyclerView.setAdapter(adapter);
 
         Intent intent = getIntent();
-        ticket = intent.getParcelableExtra("ticket");
-        ticketName.setText(ticket.getName());
-        ticketContent.setText(ticket.getContent());
-        accountMoney.setText(ticket.getPrice()+"");
-        Glide.with(TicketDetails.this)
-                .load(ticket.getImg_url())
-                .into(ticketUrl);
+        hotel = intent.getParcelableExtra("hotel");
+        hotelName.setText(hotel.getName());
+        hotelContent.setText(hotel.getContent());
+        accountMoney.setText(hotel.getPrice()+"");
+        Glide.with(HotelDetails.this)
+                .load(hotel.getImg_url())
+                .into(hotelImg);
 
         subtractButton.setOnClickListener(this);
         addButton.setOnClickListener(this);
@@ -94,13 +94,13 @@ public class TicketDetails extends AppCompatActivity implements View.OnClickList
                 if (account > 0) {
                     account -= 1;
                     buyNumber.setText(String.valueOf(account));
-                    accountMoney.setText(String.valueOf(account*ticket.getPrice())+"元");
+                    accountMoney.setText(String.valueOf(account*hotel.getPrice())+"元");
                 }
                 break;
             case R.id.add_button:
                 account += 1;
                 buyNumber.setText(String.valueOf(account));
-                accountMoney.setText(String.valueOf(account*ticket.getPrice())+"元");
+                accountMoney.setText(String.valueOf(account*hotel.getPrice())+"元");
                 break;
         }
     }

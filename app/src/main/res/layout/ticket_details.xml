@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/details_img"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:focusableInTouchMode="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/team_item_test" />
+    <TextView
+        android:id="@+id/details_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="武夷山一日游"
+        android:layout_marginTop="5dp"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/details_img" />
+    <TextView
+        android:id="@+id/details_content"
+        android:layout_margin="5dp"
+        android:text="简介：武夷山，武夷山位于江西与福建西北部两省交界处，武夷山脉北段东南麓总面积999.75平方公里，是中国著名的风景旅游区和避暑胜地。属典型的丹霞地貌，是首批国家级重点风景名胜区之一。"
+        android:ellipsize="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/details_name" />
+
+    <TextView
+        android:id="@+id/apprise_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="用户评价"
+        android:textStyle="italic|bold"
+        android:textColor="@color/pink"
+        android:background="@color/white"
+        android:layout_below="@+id/details_content"
+        android:layout_marginTop="5dp"
+        />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/details_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/apprise_text"
+        android:layout_marginBottom="50dp"
+        android:background="@color/white">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:id="@+id/row1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:gravity="center">
+            <Button
+                android:id="@+id/subtract_button"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:text="-"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:background="@color/white"/>
+            <TextView
+                android:id="@+id/buy_number"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="1"
+                android:background="@color/white"/>
+            <Button
+                android:id="@+id/add_button"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:text="+"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:background="@color/white"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="总价:"
+            android:textSize="20sp"
+            android:layout_toLeftOf="@id/account_price"
+            />
+
+        <TextView
+            android:id="@+id/account_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/buy_button"
+            android:text="100"
+            android:textSize="20sp" />
+        <Button
+            android:id="@+id/buy_button"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:text="订购"
+            android:textSize="16sp"
+            android:background="@color/pink"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"/>
+    </RelativeLayout>
+</RelativeLayout>

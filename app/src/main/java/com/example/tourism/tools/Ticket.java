@@ -1,6 +1,9 @@
 package com.example.tourism.tools;
 
-public class Ticket {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Ticket implements Parcelable {
     private String img_url;
     private String name;
     private String content;
@@ -37,4 +40,34 @@ public class Ticket {
     public int getPrice() {
         return price;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(img_url);
+        dest.writeString(content);
+        dest.writeInt(price);
+    }
+
+    public static final Parcelable.Creator<Ticket> CREATOR = new Parcelable.Creator<Ticket>() {
+        @Override
+        public Ticket createFromParcel(Parcel source) {
+            Ticket ticket = new Ticket();
+            ticket.name = source.readString();
+            ticket.img_url = source.readString();
+            ticket.content = source.readString();
+            ticket.price = source.readInt();
+            return ticket;
+        }
+
+        @Override
+        public Ticket[] newArray(int size) {
+            return new Ticket[size];
+        }
+    };
 }

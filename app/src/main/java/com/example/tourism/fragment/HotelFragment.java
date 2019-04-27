@@ -55,7 +55,7 @@ public class HotelFragment extends Fragment {
         for (int i = 0; i < hotelName.length; i++) {
             Hotel hotel = new Hotel();
 
-            hotel.setCover_url(url[i]);
+            hotel.setImg_url(url[i]);
             hotel.setName(hotelName[i]);
             hotel.setContent(hotelContent[i]);
             hotel.setPrice(hotelPrice[i]);
@@ -68,7 +68,7 @@ public class HotelFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.hotel_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        hotelAdapter = new HotelAdapter(mHotelList);
+        hotelAdapter = new HotelAdapter(mHotelList, getActivity());
         recyclerView.setAdapter(hotelAdapter);
     }
 }

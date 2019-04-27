@@ -51,11 +51,14 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.ticket_item, viewGroup, false);
-        ViewHolder holder = new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
         holder.ticketView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, TicketDetails.class);
+                int position = holder.getAdapterPosition();
+                Ticket ticket = mTicketList.get(position);
+                intent.putExtra("ticket", ticket);
                 mContext.startActivity(intent);
             }
         });

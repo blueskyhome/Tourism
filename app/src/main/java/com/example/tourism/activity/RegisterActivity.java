@@ -1,8 +1,5 @@
 package com.example.tourism.activity;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -15,6 +12,10 @@ import android.widget.Toast;
 
 import com.example.tourism.R;
 import com.example.tourism.tools.MyDatabaseHelper;
+import com.example.tourism.tools.User;
+
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener{
 
@@ -69,12 +70,20 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private void register() {
         if (!(TextUtils.isEmpty(accountText.getText().toString()) || TextUtils.isEmpty(passwordText.getText().toString()) || TextUtils.isEmpty(checkPasswordText.getText()))) {
             if(passwordText.getText().toString().equals(checkPasswordText.getText().toString())) {
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                ContentValues values = new ContentValues();
-                values.put("account", accountText.getText().toString());
-                values.put("password", passwordText.getText().toString());
-                values.put("name", nameText.getText().toString());
-                db.insert("Account", null, values);
+                final User user = new User();
+                user.setUsername(accountText.getText().toString());
+                user.setPassword(passwordText.getText().toString());
+                user.setNickName(nameText.getText().toString());
+                user.signUp(new SaveListener<User>() {
+                    @Override
+                    public void done(User user, BmobException e) {
+                        if (e == null) {
+                           Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(RegisterActivity.this, "注册失败：" + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
                 finish();
             } else {
                 Toast.makeText(this, "密码确认错误", Toast.LENGTH_SHORT).show();

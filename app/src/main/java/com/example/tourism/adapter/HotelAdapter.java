@@ -1,5 +1,7 @@
 package com.example.tourism.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.tourism.R;
+import com.example.tourism.activity.HotelDetails;
 import com.example.tourism.tools.Hotel;
 import com.example.tourism.tools.MyApplication;
 
@@ -18,12 +21,14 @@ import java.util.List;
 public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> {
 
     private List<Hotel> mHotelList;
+    private Context mContext;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView hotelImg;
         private TextView hotelName;
         private TextView hotelContent;
         private TextView hotelPrice;
+        private View hotelItem;
 
         public ViewHolder (View view) {
             super(view);
@@ -31,19 +36,31 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
             hotelName = (TextView) view.findViewById(R.id.hotel_item_text_title);
             hotelContent = (TextView) view.findViewById(R.id.hotel_item_text_context);
             hotelPrice = (TextView) view.findViewById(R.id.hotel_item_text_money_context);
+            hotelItem = (View) view.findViewById(R.id.hotel_item);
         }
     }
 
-    public HotelAdapter (List<Hotel> hotelList) {
+    public HotelAdapter (List<Hotel> hotelList, Context context) {
         mHotelList = hotelList;
+        mContext = context;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.hotel_item, viewGroup, false);
-        ViewHolder holder = new ViewHolder(view);
+        final ViewHolder holder = new ViewHolder(view);
+        holder.hotelItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = holder.getAdapterPosition();
+                Hotel hotel = mHotelList.get(position);
+                Intent intent = new Intent(mContext, HotelDetails.class);
+                intent.putExtra("hotel", hotel);
+                mContext.startActivity(intent);
+            }
+        });
         return holder;
     }
 
@@ -54,7 +71,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         viewHolder.hotelContent.setText(hotel.getContent());
         viewHolder.hotelPrice.setText(hotel.getPrice()+"");
         Glide.with(MyApplication.getContext())
-                .load(hotel.getCover_url())
+                .load(hotel.getImg_url())
                 .into(viewHolder.hotelImg);
     }
 
