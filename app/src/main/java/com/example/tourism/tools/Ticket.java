@@ -3,6 +3,10 @@ package com.example.tourism.tools;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
+import cn.bmob.v3.BmobObject;
+
 public class Ticket implements Parcelable {
     private String img_url;
     private String name;

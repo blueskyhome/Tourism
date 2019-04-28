@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tourism.R;
@@ -21,19 +22,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HotelDetails extends AppCompatActivity implements View.OnClickListener{
-
+    private List<Apprise> list = new ArrayList<>();
+    private RecyclerView recyclerView;
     private Button subtractButton;
     private Button addButton;
     private Button buyButton;
-    private int account = 1;
+    private ImageView hotelImg;
     private TextView buyNumber;
     private TextView accountMoney;
-    private RecyclerView recyclerView;
-    private List<Apprise> list = new ArrayList<>();
-    private ImageView hotelImg;
     private TextView hotelName;
     private TextView hotelContent;
+    private TextView questionAccount;
+    private TextView question1;
+    private TextView question2;
+    private View questionView;
     private Hotel hotel;
+    private int account = 1;
 
     private String[] userName = new String[]{"希尔顿酒店","三亚海悦湾度假酒店","万豪国际酒店","三亚文华东方酒店"};
     private String[] userContent = new String[]{
@@ -67,6 +71,11 @@ public class HotelDetails extends AppCompatActivity implements View.OnClickListe
         buyButton = (Button) findViewById(R.id.buy_button);
         buyNumber = (TextView) findViewById(R.id.buy_number);
         accountMoney = (TextView) findViewById(R.id.account_price);
+        questionAccount = (TextView) findViewById(R.id.questionAccount);
+        question1 = (TextView) findViewById(R.id.question1);
+        question2 = (TextView) findViewById(R.id.question2);
+        questionView = (View) findViewById(R.id.question);
+
         recyclerView = (RecyclerView) findViewById(R.id.details_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -82,9 +91,14 @@ public class HotelDetails extends AppCompatActivity implements View.OnClickListe
                 .load(hotel.getImg_url())
                 .into(hotelImg);
 
+        questionAccount.setText("("+"31"+")");
+        question1.setText("服务态度好吗");
+        question2.setText("一张门票可以玩一天吗");
+
         subtractButton.setOnClickListener(this);
         addButton.setOnClickListener(this);
         buyButton.setOnClickListener(this);
+        questionView.setOnClickListener(this);
     }
 
     @Override
@@ -101,6 +115,14 @@ public class HotelDetails extends AppCompatActivity implements View.OnClickListe
                 account += 1;
                 buyNumber.setText(String.valueOf(account));
                 accountMoney.setText(String.valueOf(account*hotel.getPrice())+"元");
+                break;
+            case R.id.buy_button:
+                Toast.makeText(this, "已添加订单", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.question:
+                Intent intent = new Intent(this, QuestionActivity.class);
+                intent.putExtra("name", hotel.getName());
+                startActivity(intent);
                 break;
         }
     }

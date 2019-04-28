@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.HotelDetails"></activity>
+        <activity android:name=".activity.QuestionActivity"></activity>
+        <activity android:name=".activity.HotelDetails" />
         <activity android:name=".activity.DriveDetailActivity" />
         <activity android:name=".activity.TicketDetails" />
         <activity android:name=".activity.SettingActivity" />
@@ -38,7 +39,7 @@
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.example.tourism.BmobContentProvider"></provider>
+            android:authorities="com.example.tourism.BmobContentProvider" />
     </application>
 
 </manifest>

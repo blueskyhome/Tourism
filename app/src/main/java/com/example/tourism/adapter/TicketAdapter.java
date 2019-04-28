@@ -4,15 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tourism.R;
+import com.example.tourism.activity.LoginActivity;
 import com.example.tourism.activity.TicketDetails;
+import com.example.tourism.tools.Global;
 import com.example.tourism.tools.MyApplication;
 import com.example.tourism.tools.Ticket;
 
@@ -55,11 +59,16 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
         holder.ticketView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, TicketDetails.class);
-                int position = holder.getAdapterPosition();
-                Ticket ticket = mTicketList.get(position);
-                intent.putExtra("ticket", ticket);
-                mContext.startActivity(intent);
+                if (Global.isLogin) {
+                    Intent intent = new Intent(mContext, TicketDetails.class);
+                    int position = holder.getAdapterPosition();
+                    Ticket ticket = mTicketList.get(position);
+                    intent.putExtra("ticket", ticket);
+                    mContext.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(mContext, LoginActivity.class);
+                    mContext.startActivity(intent);
+                }
             }
         });
         return holder;

@@ -9,30 +9,40 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tourism.R;
 import com.example.tourism.adapter.AppraseAdapter;
 import com.example.tourism.tools.Apprise;
+import com.example.tourism.tools.Global;
+import com.example.tourism.tools.Order;
 import com.example.tourism.tools.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
+
 public class TicketDetails extends AppCompatActivity implements View.OnClickListener {
 
+    private List<Apprise> list = new ArrayList<>();
+    private RecyclerView recyclerView;
     private Button subtractButton;
     private Button addButton;
     private Button buyButton;
-    private int account = 1;
+    private ImageView ticketUrl;
     private TextView buyNumber;
     private TextView accountMoney;
-    private RecyclerView recyclerView;
-    private List<Apprise> list = new ArrayList<>();
-    private ImageView ticketUrl;
     private TextView ticketName;
     private TextView ticketContent;
+    private TextView questionAccount;
+    private TextView question1;
+    private TextView question2;
+    private View questionView;
     private Ticket ticket;
+    private int account = 1;
 
     private String[] userName = new String[]{"希尔顿酒店","三亚海悦湾度假酒店","万豪国际酒店","三亚文华东方酒店"};
     private String[] userContent = new String[]{
@@ -62,11 +72,16 @@ public class TicketDetails extends AppCompatActivity implements View.OnClickList
         ticketUrl = (ImageView) findViewById(R.id.details_img);
         ticketName = (TextView) findViewById(R.id.details_name);
         ticketContent = (TextView) findViewById(R.id.details_content);
+        questionAccount = (TextView) findViewById(R.id.questionAccount);
+        question1 = (TextView) findViewById(R.id.question1);
+        question2 = (TextView) findViewById(R.id.question2);
         subtractButton = (Button) findViewById(R.id.subtract_button);
         addButton = (Button) findViewById(R.id.add_button);
         buyButton = (Button) findViewById(R.id.buy_button);
         buyNumber = (TextView) findViewById(R.id.buy_number);
         accountMoney = (TextView) findViewById(R.id.account_price);
+        questionView = (View) findViewById(R.id.question);
+
         recyclerView = (RecyclerView) findViewById(R.id.details_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -82,9 +97,14 @@ public class TicketDetails extends AppCompatActivity implements View.OnClickList
                 .load(ticket.getImg_url())
                 .into(ticketUrl);
 
+        questionAccount.setText("("+"31"+")");
+        question1.setText("服务态度好吗");
+        question2.setText("一张门票可以玩一天吗");
+
         subtractButton.setOnClickListener(this);
         addButton.setOnClickListener(this);
         buyButton.setOnClickListener(this);
+        questionView.setOnClickListener(this);
     }
 
     @Override
@@ -101,6 +121,14 @@ public class TicketDetails extends AppCompatActivity implements View.OnClickList
                 account += 1;
                 buyNumber.setText(String.valueOf(account));
                 accountMoney.setText(String.valueOf(account*ticket.getPrice())+"元");
+                break;
+            case R.id.buy_button:
+                addOrder();
+                break;
+            case R.id.question:
+                Intent intent = new Intent(this, QuestionActivity.class);
+                intent.putExtra("name", ticket.getName());
+                startActivity(intent);
                 break;
         }
     }
@@ -119,4 +147,26 @@ public class TicketDetails extends AppCompatActivity implements View.OnClickList
             list.add(apprise);
         }
     }
+
+    private void addOrder() {
+        final Order tickerOrder = new Order();
+        tickerOrder.setUser(Global.userName);
+        tickerOrder.setThing_name(ticket.getName());
+        tickerOrder.setThing_number(account);
+        tickerOrder.setSingle_money(ticket.getPrice());
+        tickerOrder.setMoney(ticket.getPrice() * account);
+        tickerOrder.setIs_examine(false);
+        tickerOrder.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e == null) {
+                    Toast.makeText(TicketDetails.this, "下单成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(TicketDetails.this, "下单失败"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
 }
