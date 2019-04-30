@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 import com.example.tourism.R;
 import com.example.tourism.activity.LoginActivity;
+import com.example.tourism.activity.OrderActivity;
 import com.example.tourism.activity.SettingActivity;
+import com.example.tourism.adapter.OrderAdapter;
 import com.example.tourism.tools.Global;
 
 public class MineFragment extends Fragment implements View.OnClickListener {
@@ -23,6 +25,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private ImageView settingImg;
     private TextView name;
     private RelativeLayout layout;
+    private View myOrder;
 
     @Nullable
     @Override
@@ -38,18 +41,27 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private void initView(View view) {
         settingImg = (ImageView) view.findViewById(R.id.setting_button);
         name = (TextView) view.findViewById(R.id.name);
+        myOrder = (View) view.findViewById(R.id.my_order);
         layout = (RelativeLayout) view.findViewById(R.id.login_button);
         if (Global.isLogin) {
             if (Global.isManager) {
                 name.setText(Global.managerName);
             } else {
-                name.setText(Global.userName);
+                name.setText(Global.nickName);
             }
             layout.setVisibility(View.GONE);
         } else {
             layout.setVisibility(View.VISIBLE);
             layout.setOnClickListener(this);
         }
+
+        myOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), OrderActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

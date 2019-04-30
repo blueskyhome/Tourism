@@ -150,6 +150,7 @@ public class TicketDetails extends AppCompatActivity implements View.OnClickList
 
     private void addOrder() {
         final Order tickerOrder = new Order();
+        tickerOrder.setThing_img(ticket.getImg_url());
         tickerOrder.setUser(Global.userName);
         tickerOrder.setThing_name(ticket.getName());
         tickerOrder.setThing_number(account);
@@ -161,12 +162,13 @@ public class TicketDetails extends AppCompatActivity implements View.OnClickList
             public void done(String s, BmobException e) {
                 if (e == null) {
                     Toast.makeText(TicketDetails.this, "下单成功", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(TicketDetails.this, OrderActivity.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(TicketDetails.this, "下单失败"+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-
 
 }

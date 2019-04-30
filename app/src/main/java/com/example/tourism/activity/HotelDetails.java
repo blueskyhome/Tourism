@@ -15,11 +15,16 @@ import com.bumptech.glide.Glide;
 import com.example.tourism.R;
 import com.example.tourism.adapter.AppraseAdapter;
 import com.example.tourism.tools.Apprise;
+import com.example.tourism.tools.Global;
 import com.example.tourism.tools.Hotel;
+import com.example.tourism.tools.Order;
 import com.example.tourism.tools.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 
 public class HotelDetails extends AppCompatActivity implements View.OnClickListener{
     private List<Apprise> list = new ArrayList<>();
@@ -117,7 +122,7 @@ public class HotelDetails extends AppCompatActivity implements View.OnClickListe
                 accountMoney.setText(String.valueOf(account*hotel.getPrice())+"元");
                 break;
             case R.id.buy_button:
-                Toast.makeText(this, "已添加订单", Toast.LENGTH_SHORT).show();
+                addOrder();
                 break;
             case R.id.question:
                 Intent intent = new Intent(this, QuestionActivity.class);
@@ -140,5 +145,28 @@ public class HotelDetails extends AppCompatActivity implements View.OnClickListe
 
             list.add(apprise);
         }
+    }
+
+    private void addOrder() {
+        final Order tickerOrder = new Order();
+        tickerOrder.setThing_img(hotel.getImg_url());
+        tickerOrder.setUser(Global.userName);
+        tickerOrder.setThing_name(hotel.getName());
+        tickerOrder.setThing_number(account);
+        tickerOrder.setSingle_money(hotel.getPrice());
+        tickerOrder.setMoney(hotel.getPrice() * account);
+        tickerOrder.setIs_examine(false);
+        tickerOrder.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e == null) {
+                    Toast.makeText(HotelDetails.this, "下单成功", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(HotelDetails.this, OrderActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(HotelDetails.this, "下单失败"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

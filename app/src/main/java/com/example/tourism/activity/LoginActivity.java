@@ -105,6 +105,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     if (e == null) {
                         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                         Global.isLogin = true;
+                        Global.userName = user.getUsername();
+                        Global.nickName = user.getNickName();
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                     } else {

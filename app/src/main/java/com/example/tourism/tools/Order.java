@@ -3,12 +3,17 @@ package com.example.tourism.tools;
 import cn.bmob.v3.BmobObject;
 
 public class Order extends BmobObject {
+    private String thing_img;
     private String user;             //用户
     private String thing_name;       //商品名
     private int thing_number;        //数量
     private Boolean is_examine;      //是否审核
     private int money;
     private int single_money;
+
+    public void setThing_img(String thing_img) {
+        this.thing_img = thing_img;
+    }
 
     public void setUser(String user) {
         this.user = user;
@@ -28,6 +33,10 @@ public class Order extends BmobObject {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public String getThing_img() {
+        return thing_img;
     }
 
     public void setSingle_money(int single_money) {
