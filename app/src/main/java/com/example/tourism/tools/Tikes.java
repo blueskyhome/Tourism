@@ -1,10 +1,8 @@
 package com.example.tourism.tools;
 
-import java.io.Serializable;
-
 import cn.bmob.v3.BmobObject;
 
-public class Ticket extends BmobObject {
+public class Tikes extends BmobObject {
     private String img_url;
     private String name;
     private String content;

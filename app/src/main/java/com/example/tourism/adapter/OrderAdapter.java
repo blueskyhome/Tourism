@@ -68,13 +68,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                     @Override
                     public void run() {
                         int opsition = holder.getAdapterPosition();
-                        Order order = mOrderList.get(opsition);
+                        final Order order = mOrderList.get(opsition);
                         order.delete(new UpdateListener() {
                             @Override
                             public void done(BmobException e) {
                                 if (e == null ) {
                                     Message message = new Message();
                                     message.what = 1;
+                                    Global.orderName = order.getThing_name();
                                     handler.sendMessage(message);
                                 }
                             }

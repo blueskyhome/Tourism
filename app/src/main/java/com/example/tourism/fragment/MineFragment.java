@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.tourism.R;
 import com.example.tourism.activity.LoginActivity;
 import com.example.tourism.activity.OrderActivity;
@@ -58,8 +59,13 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         myOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), OrderActivity.class);
-                startActivity(intent);
+                if (Global.isLogin) {
+                    Intent intent = new Intent(getActivity(), OrderActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

@@ -57,7 +57,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
                 int position = holder.getAdapterPosition();
                 Hotel hotel = mHotelList.get(position);
                 Intent intent = new Intent(mContext, HotelDetails.class);
-                intent.putExtra("hotel", hotel);
+                intent.putExtra("name", hotel.getName());
                 mContext.startActivity(intent);
             }
         });

@@ -18,13 +18,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:focusableInTouchMode="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/team_item_test" />
+                android:scaleType="fitXY" />
             <TextView
                 android:id="@+id/details_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="武夷山一日游"
                 android:layout_marginTop="5dp"
                 android:textSize="20sp"
                 android:textColor="#000"
@@ -34,7 +32,6 @@
             <TextView
                 android:id="@+id/details_content"
                 android:layout_margin="5dp"
-                android:text="简介：武夷山，武夷山位于江西与福建西北部两省交界处，武夷山脉北段东南麓总面积999.75平方公里，是中国著名的风景旅游区和避暑胜地。属典型的丹霞地貌，是首批国家级重点风景名胜区之一。"
                 android:ellipsize="end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,7 +182,6 @@
             android:layout_marginRight="5dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/buy_button"
-            android:text="100"
             android:textSize="20sp" />
         <Button
             android:id="@+id/buy_button"

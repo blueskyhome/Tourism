@@ -8,4 +8,6 @@ public class Global {
     public static String userName;
     public static String nickName;
     public static Boolean isLogin = false;
+
+    public static String orderName;
 }

@@ -63,7 +63,8 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
                     Intent intent = new Intent(mContext, TicketDetails.class);
                     int position = holder.getAdapterPosition();
                     Ticket ticket = mTicketList.get(position);
-                    intent.putExtra("ticket", ticket);
+                    intent.putExtra("name", ticket.getName());
+                    intent.putExtra("style", "Ticket");
                     mContext.startActivity(intent);
                 } else {
                     Intent intent = new Intent(mContext, LoginActivity.class);

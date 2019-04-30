@@ -1,11 +1,18 @@
 package com.example.tourism.tools;
 
-public class Apprise {
+import cn.bmob.v3.BmobObject;
 
+public class Apprise extends BmobObject {
+
+    private String name;
     private String imgUrl;
     private String userName;
     private String userApprise;
     private int seeNumber;
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public void setImgId(String imgUrl) {
         this.imgUrl = imgUrl;
@@ -21,6 +28,10 @@ public class Apprise {
 
     public void setSeeNumber(int seeNumber) {
         this.seeNumber = seeNumber;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getImgUrl() {
