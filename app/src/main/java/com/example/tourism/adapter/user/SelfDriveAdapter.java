@@ -19,9 +19,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import com.example.tourism.activity.user.DriveDetailActivity;
-import com.example.tourism.tools.Drive;
+import com.example.tourism.tools.user.Drive;
 import com.example.tourism.tools.MyApplication;
-import com.example.tourism.tools.user.SelfDrive;
 
 import com.example.tourism.R;
 import java.util.List;
@@ -61,7 +60,7 @@ public class SelfDriveAdapter extends RecyclerView.Adapter<SelfDriveAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        Drive selfDrive = mSelfDriveList.get(i);
+        final Drive selfDrive = mSelfDriveList.get(i);
         viewHolder.titleText.setText(selfDrive.getTitle());
         viewHolder.hotelContent.setText(selfDrive.getHotel());
         viewHolder.moneyText.setText(selfDrive.getMoney()+"元");
@@ -83,8 +82,8 @@ public class SelfDriveAdapter extends RecyclerView.Adapter<SelfDriveAdapter.View
         viewHolder.coverImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(context, DriveDetailActivity.class);
+                Intent intent = new Intent(context,DriveDetailActivity.class);
+                intent.putExtra("name",selfDrive.getTitle());
                 context.startActivity(intent);
             }
         });

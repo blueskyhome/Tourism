@@ -1,5 +1,7 @@
 package com.example.tourism.adapter.user;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.tourism.activity.user.TeamDetailActivity;
 import com.example.tourism.tools.MyApplication;
 
 import com.example.tourism.tools.user.Team;
@@ -20,6 +23,7 @@ import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     private List<Team>  mTeamList;
+    private Context context;
     static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView coverImage;
         TextView titleText;
@@ -36,8 +40,9 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
             moneyText = (TextView)view.findViewById(R.id.team_item_text_money_context);
         }
     }
-    public TeamAdapter(List<Team> teamList){
+    public TeamAdapter(List<Team> teamList, Context context){
         mTeamList = teamList;
+        this.context = context;
     }
 
     @NonNull
@@ -46,6 +51,17 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
          View view = LayoutInflater.from(viewGroup.getContext())
                  .inflate(R.layout.team_item,viewGroup,false);
          ViewHolder holder = new ViewHolder(view);
+         final Team team = mTeamList.get(i);
+         view.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent intent = new Intent(context, TeamDetailActivity.class);
+                 intent.putExtra("name",team.getTitle());
+                 context.startActivity(intent);
+
+
+             }
+         });
          return holder;
     }
 

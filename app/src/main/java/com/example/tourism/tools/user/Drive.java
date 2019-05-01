@@ -1,4 +1,4 @@
-package com.example.tourism.tools;
+package com.example.tourism.tools.user;
 
 import cn.bmob.v3.BmobObject;
 
@@ -8,6 +8,8 @@ public class Drive extends BmobObject {
     private String hotel;
     private Integer money;
     private String recommend;
+    private String type;
+    private String word;
 
     public Integer getMoney() {
         return money;
@@ -25,7 +27,13 @@ public class Drive extends BmobObject {
         return hotel;
     }
 
+    public String getType() {
+        return type;
+    }
 
+    public String getWord() {
+        return word;
+    }
 
     public String getTitle() {
         return title;
@@ -55,5 +63,13 @@ public class Drive extends BmobObject {
     public Drive setTitle(String title) {
         this.title = title;
         return this;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 }

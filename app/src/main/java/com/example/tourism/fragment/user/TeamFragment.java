@@ -45,7 +45,7 @@ public class TeamFragment extends Fragment {
             @Override
             public boolean handleMessage(Message msg) {
                 if(msg.what == 1){
-                    adapter = new TeamAdapter(teamList);
+                    adapter = new TeamAdapter(teamList,getActivity());
                     recyclerView.setAdapter(adapter);
                 }
                 return true;

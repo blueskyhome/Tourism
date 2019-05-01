@@ -2,7 +2,7 @@ package com.example.tourism.activity.user;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.widget.NestedScrollView;
+import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,18 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.bumptech.glide.Glide;
 import com.example.tourism.R;
 import com.example.tourism.adapter.user.AppraseAdapter;
 import com.example.tourism.tools.GlideImageLoader;
-
 import com.example.tourism.tools.Global;
 import com.example.tourism.tools.MyApplication;
 import com.example.tourism.tools.user.Apprise;
 import com.example.tourism.tools.user.Drive;
-import com.example.tourism.tools.user.Hotel;
 import com.example.tourism.tools.user.Order;
+import com.example.tourism.tools.user.Team;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
@@ -38,37 +36,39 @@ import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 
-public class DriveDetailActivity extends AppCompatActivity {
+public class TeamDetailActivity extends AppCompatActivity {
 
-    private Banner banner;
-    private ArrayList arrayList;
+
+    private String name;
+    private Team team;
+    private AppraseAdapter adapter;
     private int mount = 1;
     private int money;
-    private String name;
-    private Drive drive;
-    private AppraseAdapter adapter;
-    @BindView(R.id.drive_detail_title)
-    TextView drive_title;
-    @BindView(R.id.drive_detail_recommend)
-    TextView drive_recommend;
-    @BindView(R.id.drive_detail_money_one)
-    TextView drive_money_one;
-    @BindView(R.id.drive_detail_img)
-    ImageView drive_img;
-    @BindView(R.id.drive_question1)
+    @BindView(R.id.team_detail_title)
+    TextView team_title;
+    @BindView(R.id.team_detail_recommend)
+    TextView team_recommend;
+    @BindView(R.id.team_detail_money_one)
+    TextView team_money_one;
+    @BindView(R.id.team_detail_cover)
+    ImageView team_cover;
+    @BindView(R.id.team_detail_img)
+    ImageView team_img;
+    @BindView(R.id.team_question1)
     TextView question1;
-    @BindView(R.id.drive_question2)
+    @BindView(R.id.team_question2)
     TextView question2;
-    @BindView(R.id.drive_details_recycler)
+    @BindView(R.id.team_details_recycler)
     RecyclerView recyclerView;
-    @BindView(R.id.drive_detail_order)
-    Button drive_order;
-    @BindView(R.id.drive_add)
+    @BindView(R.id.team_detail_order)
+    Button team_order;
+    @BindView(R.id.team_add)
     ImageView team_add;
-    @BindView(R.id.drive_reduce)
+    @BindView(R.id.team_reduce)
     ImageView team_reduce;
-    @BindView(R.id.drive_mount)
+    @BindView(R.id.team_mount)
     TextView team_mount;
+
     String[] images= new String[] {
             "http://img.zcool.cn/community/0166c756e1427432f875520f7cc838.jpg",
             "http://img.zcool.cn/community/018fdb56e1428632f875520f7b67cb.jpg",
@@ -79,58 +79,50 @@ public class DriveDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_drive_detail);
+        setContentView(R.layout.activity_team_detail);
         ButterKnife.bind(this);
         initView();
 
         initData();
     }
 
-     public void  initView(){
-         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-         recyclerView.setLayoutManager(layoutManager);
-         question1.setText("服务态度好吗");
-         question2.setText("一张门票可以玩一天吗");
-         team_add.setColorFilter(Color.RED);
-         team_reduce.setColorFilter(Color.GREEN);
-         banner = (Banner)findViewById(R.id.picture_banner);
-        banner.setImageLoader(new GlideImageLoader());
-        arrayList = new ArrayList<String>();
-        arrayList.clear();
-        for(String str : images){
-            arrayList.add(str);
-        }
-         banner.setImages(arrayList);
-         banner.start();
-     }
-     @OnClick({R.id.drive_question1,R.id.drive_question2,R.id.drive_detail_order})
-     public void onClick(View v){
+    public void  initView(){
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        question1.setText("服务态度好吗");
+        question2.setText("一张门票可以玩一天吗");
+        team_add.setColorFilter(Color.RED);
+        team_reduce.setColorFilter(Color.GREEN);
+
+    }
+    @OnClick({R.id.team_question1,R.id.team_question2,R.id.team_detail_order,R.id.team_add,R.id.team_reduce})
+    public void onClick(View v){
         switch (v.getId()){
-            case R.id.drive_question1:
-            case R.id.drive_question2:
+            case R.id.team_question1:
+            case R.id.team_question2:
                 Intent intent = new Intent(this,QuestionActivity.class);
-                intent.putExtra("name", drive.getTitle());
+                intent.putExtra("name", team.getTitle());
                 startActivity(intent);
                 break;
-            case R.id.drive_detail_order:
+            case R.id.team_detail_order:
                 addOrder();
                 break;
-            case R.id.drive_add:
+            case R.id.team_add:
                 mount += 1;
                 team_mount.setText(String.valueOf(mount));
-                drive_money_one.setText(String.valueOf(mount*money)+"元");
+                team_money_one.setText(String.valueOf(mount*money)+"元");
                 break;
             case R.id.team_reduce:
                 if(mount > 1){
                     mount -= 1;
                     team_mount.setText(String.valueOf(mount));
-                    drive_money_one.setText(String.valueOf(mount*money)+"元");
+                    team_money_one.setText(String.valueOf(mount*money)+"元");
                 }
                 break;
             default:
                 break;
         }
-     }
+    }
 
     private void initData() {
         Intent intent = getIntent();
@@ -139,20 +131,24 @@ public class DriveDetailActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                BmobQuery<Drive> bmobQuery = new BmobQuery<>();
+                BmobQuery<Team> bmobQuery = new BmobQuery<>();
                 bmobQuery.addWhereEqualTo("title", name);
-                bmobQuery.findObjects(new FindListener<Drive>() {
+                bmobQuery.findObjects(new FindListener<Team>() {
                     @Override
-                    public void done(List<Drive> list, BmobException e) {
-                        drive = list.get(0);
-                        drive_title.setText(drive.getTitle());
-                        drive_money_one.setText("￥"+drive.getMoney()+"元起");
-                        money = drive.getMoney();
-                        drive_recommend.setText(drive.getRecommend());
+                    public void done(List<Team> list, BmobException e) {
+                        team = list.get(0);
+                        team_title.setText(team.getTitle());
+                        team_money_one.setText("￥"+team.getMoney()+"元起");
+                        money = team.getMoney();
+                        team_recommend.setText(team.getWord());
                         Glide.with(MyApplication.getContext())
-                                .load(drive.getCover_url())
+                                .load(team.getCover_url())
                                 .asBitmap()
-                                .into(drive_img);
+                                .into(team_img);
+                        Glide.with(MyApplication.getContext())
+                                .load(team.getCover_url())
+                                .asBitmap()
+                                .into(team_cover);
                         list.clear();
                     }
                 });
@@ -171,36 +167,26 @@ public class DriveDetailActivity extends AppCompatActivity {
     }
     private void addOrder() {
         final Order tickerOrder = new Order();
-        tickerOrder.setThing_img(drive.getCover_url());
+        tickerOrder.setThing_img(team.getCover_url());
         tickerOrder.setUser(Global.userName);
-        tickerOrder.setThing_name(drive.getTitle());
+        tickerOrder.setThing_name(team.getTitle());
         tickerOrder.setThing_number(mount);
-        tickerOrder.setSingle_money(drive.getMoney());
+        tickerOrder.setSingle_money(team.getMoney());
         tickerOrder.setMoney(money);
         tickerOrder.setIs_examine(false);
         tickerOrder.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
                 if (e == null) {
-                    Toast.makeText(DriveDetailActivity.this, "下单成功", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DriveDetailActivity.this, OrderActivity.class);
+                    Toast.makeText(TeamDetailActivity.this, "下单成功", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(TeamDetailActivity.this, OrderActivity.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(DriveDetailActivity.this, "下单失败"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TeamDetailActivity.this, "下单失败"+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        banner.startAutoPlay();
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        banner.stopAutoPlay();
-    }
 }

@@ -8,6 +8,7 @@ public class Team extends BmobObject {
     private String hotel;
     private int money;
     private String word;
+    private String type;
 
     public String getTitle() {
         return title;
@@ -29,6 +30,10 @@ public class Team extends BmobObject {
         return money;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public void setWord(String word) {
         this.word = word;
     }
@@ -47,5 +52,9 @@ public class Team extends BmobObject {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

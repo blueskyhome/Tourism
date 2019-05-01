@@ -15,8 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.tourism.R;
 import com.example.tourism.adapter.user.SelfDriveAdapter;
-import com.example.tourism.tools.Drive;
-import com.example.tourism.tools.user.SelfDrive;
+import com.example.tourism.tools.user.Drive;
 
 
 import java.util.ArrayList;
