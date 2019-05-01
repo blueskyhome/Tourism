@@ -3,26 +3,23 @@ package com.example.tourism.tools;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Ticket implements Parcelable {
+import cn.bmob.v3.BmobObject;
+
+public class Ticket extends BmobObject implements Parcelable{
     private String img_url;
     private String name;
     private String content;
+    //写错懒得改了
     private int price;
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
+
+
+    public String getContent() {
+        return content;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+    public int getPrice() {
+        return price;
     }
 
     public String getImg_url() {
@@ -33,12 +30,20 @@ public class Ticket implements Parcelable {
         return name;
     }
 
-    public String getContent() {
-        return content;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public int getPrice() {
-        return price;
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     @Override

@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.tourism.tools.MyApplication;
-import com.example.tourism.tools.Team;
 import com.example.tourism.R;
+import com.example.tourism.tools.Team;
+
 import java.util.List;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
@@ -49,8 +50,8 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Team team = mTeamList.get(i);
         viewHolder.titleText.setText(team.getTitle());
-        viewHolder.contentText.setText(team.getContent());
-        viewHolder.hotelContent.setText(team.getHotelContent());
+        viewHolder.contentText.setText(team.getWord());
+        viewHolder.hotelContent.setText(team.getHotel());
         viewHolder.moneyText.setText(team.getMoney()+"元");
         Glide.with(MyApplication.getContext())
                 .load(team.getCover_url())

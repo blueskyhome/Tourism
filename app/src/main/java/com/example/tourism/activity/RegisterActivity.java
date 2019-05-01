@@ -49,6 +49,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         accountText.addTextChangedListener(new EditChangeListener());
         passwordText.addTextChangedListener(new EditChangeListener());
         checkPasswordText.addTextChangedListener(new EditChangeListener());
+
     }
 
     @Override

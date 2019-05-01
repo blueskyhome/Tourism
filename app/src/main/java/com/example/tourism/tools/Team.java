@@ -2,23 +2,15 @@ package com.example.tourism.tools;
 
 import cn.bmob.v3.BmobObject;
 
-public class Team  extends BmobObject{
-    private String cover_url;
+public class Team extends BmobObject {
     private String title;
-    private String content;
+    private String cover_url;
     private String hotel;
-    private Integer money;
+    private int money;
+    private String word;
 
     public String getTitle() {
         return title;
-    }
-
-    public Integer getMoney() {
-        return money;
-    }
-
-    public String getContent() {
-        return content;
     }
 
     public String getCover_url() {
@@ -29,30 +21,31 @@ public class Team  extends BmobObject{
         return hotel;
     }
 
-    public Team setMoney(Integer money) {
-        this.money = money;
-        return this;
+    public String getWord() {
+        return word;
     }
 
-
-    public Team setTitle(String title) {
-        this.title = title;
-        return this;
+    public int getMoney() {
+        return money;
     }
 
-    public Team setContent(String content) {
-        this.content = content;
-        return this;
+    public void setWord(String word) {
+        this.word = word;
     }
 
-    public Team setCover_url(String cover_url) {
-        this.cover_url = cover_url;
-        return this;
-    }
-
-    public Team setHotel(String hotel) {
+    public void setHotel(String hotel) {
         this.hotel = hotel;
-        return this;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCover_url(String cover_url) {
+        this.cover_url = cover_url;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
 }

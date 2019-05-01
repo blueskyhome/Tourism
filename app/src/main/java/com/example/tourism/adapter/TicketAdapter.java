@@ -2,6 +2,7 @@ package com.example.tourism.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -58,7 +59,7 @@ public class TicketAdapter extends RecyclerView.Adapter<TicketAdapter.ViewHolder
                 Intent intent = new Intent(mContext, TicketDetails.class);
                 int position = holder.getAdapterPosition();
                 Ticket ticket = mTicketList.get(position);
-                intent.putExtra("ticket", ticket);
+                intent.putExtra("ticket", (Parcelable) ticket);
                 mContext.startActivity(intent);
             }
         });

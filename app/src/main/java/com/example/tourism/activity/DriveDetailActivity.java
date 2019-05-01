@@ -48,12 +48,7 @@ public class DriveDetailActivity extends AppCompatActivity {
         }
      }
      private void initView(){
-      scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-          @Override
-          public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
 
-          }
-      });
      }
 
     @Override

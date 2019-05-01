@@ -1,12 +1,14 @@
 package com.example.tourism.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +20,12 @@ import com.example.tourism.tools.Ticket;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketFragment extends Fragment {
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
+public class TicketFragment extends Fragment {
+    private static final int UPDATE = 1;
     private List<Ticket> mTicketList = new ArrayList<>();
     private RecyclerView recyclerView;
     private TicketAdapter ticketAdapter;
@@ -48,24 +54,43 @@ public class TicketFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.ticket_fragment, null);
-        initData();
+        mTicketList.clear();
+        initData(view);
         initView(view);
         return view;
     }
 
-    private void initData() {
-        mTicketList.clear();
+    private void initData(final View view) {
 
-        for (int i = 0; i < TicketName.length; i++) {
-            Ticket ticket = new Ticket();
+        final Handler handler = new Handler() {
+            public void handleMessage(Message message) {
+                switch (message.what) {
+                    case UPDATE:
+                        initView(view);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+                BmobQuery<Ticket> ticketBmobQuery = new BmobQuery<>();
+                ticketBmobQuery.findObjects(new FindListener<Ticket>() {
+                    @Override
+                    public void done(List<Ticket> list, BmobException e) {
+                        if (e == null) {
+                            mTicketList = list;
+                            Message message = new Message();
+                            message.what = UPDATE;
+                            handler.sendMessage(message);
+                        } else {
+                            Log.e("haha", e.toString());
+                        }
+                    }
+                });
 
-            ticket.setImg_url(url[i]);
-            ticket.setName(TicketName[i]);
-            ticket.setContent(TicketContent[i]);
-            ticket.setPrice(TicketPrice[i]);
 
-           mTicketList.add(ticket);
-        }
+
+
     }
 
     private void initView(View view) {
