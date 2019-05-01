@@ -6,5 +6,8 @@ public class Global {
     public final static String managerAccount = "111111";
     public final static String managerPassword = "111111";
     public static String userName;
+    public static String nickName;
     public static Boolean isLogin = false;
+
+    public static String orderName;
 }

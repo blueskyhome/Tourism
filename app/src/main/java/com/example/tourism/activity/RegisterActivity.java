@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.tourism.R;
 import com.example.tourism.tools.MyDatabaseHelper;
-import com.example.tourism.tools.User;
+import com.example.tourism.tools.user.User;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
@@ -74,12 +74,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 final User user = new User();
                 user.setUsername(accountText.getText().toString());
                 user.setPassword(passwordText.getText().toString());
-                user.setNickName(nameText.getText().toString());
-                user.signUp(new SaveListener<User>() {
+                user.setNickname(nameText.getText().toString());
+                user.save(new SaveListener<String>() {
                     @Override
-                    public void done(User user, BmobException e) {
+                    public void done(String s, BmobException e) {
                         if (e == null) {
-                           Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(RegisterActivity.this, "注册失败：" + e.getMessage(), Toast.LENGTH_LONG).show();
                         }

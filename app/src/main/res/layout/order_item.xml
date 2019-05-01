@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:layout_marginTop="8dp">
+    <ImageView
+        android:id="@+id/order_img"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/collapsing_toolbar_image"
+        android:scaleType="fitXY"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/order_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="北京故宫"
+            android:textSize="20sp"
+            android:textColor="@color/red"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"/>
+        <TextView
+            android:id="@+id/order_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥200"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_gravity="end"
+            android:layout_marginRight="8dp"/>
+        <TextView
+            android:id="@+id/order_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X1"
+            android:textSize="16sp"
+            android:layout_gravity="end"
+            android:layout_marginRight="8dp"/>
+        <TextView
+            android:id="@+id/order_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="共1件商品 合计：200"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginLeft="8dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+           <TextView
+               android:id="@+id/is_check"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="未审核"
+               android:textSize="18sp"
+               android:textColor="@color/red"
+               android:layout_marginLeft="8dp"/>
+            <TextView
+                android:id="@+id/order_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确认收货"
+                android:textSize="18sp"
+                android:textColor="@color/red"
+                android:visibility="invisible"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="8dp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
