@@ -17,17 +17,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.OrderActivity"></activity>
-        <activity android:name=".activity.QuestionActivity" />
-        <activity android:name=".activity.HotelDetails" />
-        <activity android:name=".activity.DriveDetailActivity" />
-        <activity android:name=".activity.TicketDetails" />
+        <activity android:name=".activity.manager.ManagerActivity"></activity>
+        <activity android:name=".activity.user.OrderActivity" />
+        <activity android:name=".activity.user.QuestionActivity" />
+        <activity android:name=".activity.user.HotelDetails" />
+        <activity android:name=".activity.user.DriveDetailActivity" />
+        <activity android:name=".activity.user.TicketDetails" />
         <activity android:name=".activity.SettingActivity" />
         <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask" />
         <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.user.HomeActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTask">

@@ -1,8 +1,6 @@
 package com.example.tourism.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -16,12 +14,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tourism.R;
+import com.example.tourism.activity.manager.ManagerActivity;
+import com.example.tourism.activity.user.HomeActivity;
 import com.example.tourism.tools.Global;
 import com.example.tourism.tools.MyDatabaseHelper;
-import com.example.tourism.tools.User;
+import com.example.tourism.tools.user.User;
 
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -99,25 +103,35 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void login() {
         if (!Global.isManager) {
             save();
-            BmobUser.loginByAccount(accountText.getText().toString(), passwordText.getText().toString(), new LogInListener<User>() {
+            BmobQuery<User> bmobQuery = new BmobQuery<>();
+            bmobQuery.addWhereEqualTo("username", accountText.getText().toString());
+            bmobQuery.findObjects(new FindListener<User>() {
                 @Override
-                public void done(User user, BmobException e) {
+                public void done(List<User> list, BmobException e) {
                     if (e == null) {
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        Global.isLogin = true;
-                        Global.userName = user.getUsername();
-                        Global.nickName = user.getNickName();
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
+                        User user = list.get(0);
+                        if (user.getPassword().equals(passwordText.getText().toString())) {
+                            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            Global.isLogin = true;
+                            Global.isManager = false;
+                            Global.userName = list.get(0).getUsername();
+                            Global.nickName = list.get(0).getNickname();
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "密码错误", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "此账号未注册", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         } else {
+            save();
             if (Global.managerAccount.equals(accountText.getText().toString()) && Global.managerPassword.equals(passwordText.getText().toString())) {
                 Global.isLogin = true;
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                Global.isManager = true;
+                Intent intent = new Intent(LoginActivity.this, ManagerActivity.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, "请输入正确的账号密码", Toast.LENGTH_SHORT).show();
