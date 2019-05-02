@@ -64,11 +64,11 @@ public class DriveDetailActivity extends AppCompatActivity {
     @BindView(R.id.drive_detail_order)
     Button drive_order;
     @BindView(R.id.drive_add)
-    ImageView team_add;
+    ImageView drive_add;
     @BindView(R.id.drive_reduce)
-    ImageView team_reduce;
+    ImageView drive_reduce;
     @BindView(R.id.drive_mount)
-    TextView team_mount;
+    TextView drive_mount;
     String[] images= new String[] {
             "http://img.zcool.cn/community/0166c756e1427432f875520f7cc838.jpg",
             "http://img.zcool.cn/community/018fdb56e1428632f875520f7b67cb.jpg",
@@ -91,8 +91,8 @@ public class DriveDetailActivity extends AppCompatActivity {
          recyclerView.setLayoutManager(layoutManager);
          question1.setText("服务态度好吗");
          question2.setText("一张门票可以玩一天吗");
-         team_add.setColorFilter(Color.RED);
-         team_reduce.setColorFilter(Color.GREEN);
+         drive_add.setColorFilter(Color.RED);
+         drive_reduce.setColorFilter(Color.GREEN);
          banner = (Banner)findViewById(R.id.picture_banner);
         banner.setImageLoader(new GlideImageLoader());
         arrayList = new ArrayList<String>();
@@ -103,7 +103,7 @@ public class DriveDetailActivity extends AppCompatActivity {
          banner.setImages(arrayList);
          banner.start();
      }
-     @OnClick({R.id.drive_question1,R.id.drive_question2,R.id.drive_detail_order})
+     @OnClick({R.id.drive_question1,R.id.drive_question2,R.id.drive_detail_order,R.id.drive_add,R.id.drive_reduce})
      public void onClick(View v){
         switch (v.getId()){
             case R.id.drive_question1:
@@ -117,13 +117,13 @@ public class DriveDetailActivity extends AppCompatActivity {
                 break;
             case R.id.drive_add:
                 mount += 1;
-                team_mount.setText(String.valueOf(mount));
+                drive_mount.setText(String.valueOf(mount));
                 drive_money_one.setText(String.valueOf(mount*money)+"元");
                 break;
-            case R.id.team_reduce:
+            case R.id.drive_reduce:
                 if(mount > 1){
                     mount -= 1;
-                    team_mount.setText(String.valueOf(mount));
+                    drive_mount.setText(String.valueOf(mount));
                     drive_money_one.setText(String.valueOf(mount*money)+"元");
                 }
                 break;

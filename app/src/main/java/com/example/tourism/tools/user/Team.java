@@ -2,7 +2,7 @@ package com.example.tourism.tools.user;
 
 import cn.bmob.v3.BmobObject;
 
-public class Team extends BmobObject {
+public class Team extends Goods {
     private String title;
     private String cover_url;
     private String hotel;
