@@ -1,49 +1,60 @@
 package com.example.tourism.tools.user;
 
-public class Team {
-    private String cover_url;
+import cn.bmob.v3.BmobObject;
+
+public class Team extends BmobObject {
     private String title;
-    private String content;
-    private String hotelContent;
+    private String cover_url;
+    private String hotel;
     private int money;
+    private String word;
+    private String type;
 
     public String getTitle() {
         return title;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public String getContent() {
-        return content;
     }
 
     public String getCover_url() {
         return cover_url;
     }
 
-    public String getHotelContent() {
-        return hotelContent;
+    public String getHotel() {
+        return hotel;
+    }
+
+    public String getWord() {
+        return word;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public void setHotel(String hotel) {
+        this.hotel = hotel;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public void setCover_url(String cover_url) {
         this.cover_url = cover_url;
     }
 
-    public void setHotelContent(String hotelContent) {
-        this.hotelContent = hotelContent;
-    }
-
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -4,54 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.user.DriveDetailActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activity.user.TeamDetailActivity">
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/drive_detail_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <com.youth.banner.Banner
-                android:id="@+id/picture_banner"
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
 
-            </com.youth.banner.Banner>
+            <ImageView
+                android:id="@+id/team_detail_cover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
-                    android:id="@+id/drive_detail_title"
-                    android:text="匆匆那年.年代网红店"
-                    android:textSize="20sp"
-                    android:textColor="#000"
+                    android:id="@+id/team_detail_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:text="匆匆那年.年代网红店"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
                 <TextView
-                    android:id="@+id/drive_detail_recommend"
-                    android:text="hahhahhhhhhhhhhhhhhhhhhhhhhhhhhh"
-                    android:layout_marginTop="5dp"
+                    android:id="@+id/team_detail_recommend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="4"
-                    android:textSize="15sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
                     android:ellipsize="end"
-                    android:layout_marginLeft="10dp"/>
+                    android:maxLines="4"
+                    android:text="hahhahhhhhhhhhhhhhhhhhhhhhhhhhhh"
+                    android:textSize="15sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_margin="5dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
                     android:padding="5dp">
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -60,13 +67,13 @@
                         android:gravity="center_vertical">
 
                         <ImageView
-                            android:id="@+id/drive_add"
+                            android:id="@+id/team_add"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:src="@drawable/add_plus" />
 
                         <TextView
-                            android:id="@+id/drive_mount"
+                            android:id="@+id/team_mount"
                             android:text="1"
                             android:textSize="18sp"
                             android:textColor="#000"
@@ -75,183 +82,198 @@
                             android:layout_marginLeft="10dp"/>
 
                         <ImageView
-                            android:id="@+id/drive_reduce"
+                            android:id="@+id/team_reduce"
                             android:layout_width="35dp"
                             android:layout_height="35dp"
                             android:layout_marginLeft="10dp"
                             android:src="@drawable/reduce"/>
                     </LinearLayout>
+
+
                     <LinearLayout
-                        android:layout_gravity="center_vertical"
-                        android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center"
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/drive_detail_money_one"
+                            android:id="@+id/team_detail_money_one"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="$35起"
-                            android:textSize="16sp"
-                            android:textColor="@color/red"/>
+                            android:textColor="@color/red"
+                            android:textSize="16sp" />
 
                         <Button
-                            android:id="@+id/drive_detail_order"
-                            android:layout_marginTop="5dp"
-                            android:background="@drawable/button_background"
+                            android:id="@+id/team_detail_order"
                             android:layout_width="100dp"
                             android:layout_height="30dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/button_background"
                             android:text="@string/order"
-                            android:textColor="#fff"/>
+                            android:textColor="#fff" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_margin="5dp"
-                    android:background="#fff">
+                    android:background="#fff"
+                    android:orientation="vertical">
+
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:text="@string/accommodation"
                         android:textColor="#000"
-                        android:textSize="18sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textSize="18sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp">
+
                         <ImageView
-                            android:id="@+id/drive_detail_img"
+                            android:id="@+id/team_detail_img"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
                             android:adjustViewBounds="true"
                             android:scaleType="fitXY"
-                            android:src="@drawable/team_item_test"
-                            android:layout_gravity="center_vertical"/>
+                            android:src="@drawable/team_item_test" />
+
                         <LinearLayout
-                            android:orientation="vertical"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
-                            android:layout_marginLeft="10dp">
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical">
+
                             <TextView
-                                android:text="春节档"
-                                android:textColor="#000"
-                                android:textSize="15sp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"/>
-                            <TextView
-                                android:text="鞭炮说法上各个历史时期不同，称谓从“爆竹”、“爆竿”、“炮仗”一直到“鞭炮”."
-                                android:textColor="#000"
-                                android:textSize="13sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
-                                android:maxLines="3"
-                                android:ellipsize="end"
-                                />
+                                android:text="春节档"
+                                android:textColor="#000"
+                                android:textSize="15sp" />
+
                             <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:ellipsize="end"
+                                android:maxLines="3"
+                                android:text="鞭炮说法上各个历史时期不同，称谓从“爆竹”、“爆竿”、“炮仗”一直到“鞭炮”."
+                                android:textColor="#000"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:text="价钱：30元/晚"
-                                android:textSize="15sp"
                                 android:textColor="@color/red"
                                 android:textFontWeight="3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:textSize="15sp" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_margin="5dp"
-                    android:background="#fff">
+                    android:background="#fff"
+                    android:orientation="vertical">
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        >
+                        android:layout_gravity="center_vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="问大家（30）"
-                            android:textColor="@color/red"
-                            android:textSize="17sp"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentLeft="true"
-                            />
+                            android:text="问大家（30）"
+                            android:textColor="@color/red"
+                            android:textSize="17sp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
                             android:text="查看全部"
                             android:textColor="@color/red"
-                            android:textSize="17sp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"/>
+                            android:textSize="17sp" />
                     </RelativeLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/ask" />
+
                         <TextView
-                            android:id="@+id/drive_question1"
+                            android:id="@+id/team_question1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="3dp"
-                            />
+                            android:layout_marginRight="3dp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:orientation="horizontal">
+
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:src="@drawable/ask" />
+
                         <TextView
-                            android:id="@+id/drive_question2"
+                            android:id="@+id/team_question2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="3dp"
-                            />
+                            android:layout_marginRight="3dp" />
                     </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
+
             <TextView
-                android:id="@+id/drive_apprise_text"
+                android:id="@+id/team_apprise_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="用户评价"
-                android:textSize="17sp"
-                android:textStyle="italic|bold"
-                android:textColor="@color/pink"
-                android:background="@color/white"
                 android:layout_below="@+id/question"
                 android:layout_marginTop="5dp"
-                />
+                android:background="@color/white"
+                android:text="用户评价"
+                android:textColor="@color/pink"
+                android:textSize="17sp"
+                android:textStyle="italic|bold" />
+
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/drive_details_recycler"
+                android:id="@+id/team_details_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/drive_apprise_text"
+                android:layout_below="@+id/team_apprise_text"
                 android:layout_marginBottom="50dp"
                 android:background="@color/white">
 
             </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
-
 
 
     </android.support.v4.widget.NestedScrollView>
