@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.tourism.activity.LoginActivity;
 import com.example.tourism.activity.user.TeamDetailActivity;
+import com.example.tourism.tools.Global;
 import com.example.tourism.tools.MyApplication;
 
 import com.example.tourism.tools.user.Team;
@@ -47,7 +49,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
          View view = LayoutInflater.from(viewGroup.getContext())
                  .inflate(R.layout.team_item,viewGroup,false);
          ViewHolder holder = new ViewHolder(view);
@@ -55,10 +57,15 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
          view.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 Intent intent = new Intent(context, TeamDetailActivity.class);
-                 intent.putExtra("name",team.getTitle());
-                 context.startActivity(intent);
+                 if(Global.isLogin){
+                     Intent intent = new Intent(context, TeamDetailActivity.class);
+                     intent.putExtra("name",team.getTitle());
+                     context.startActivity(intent);
 
+                 }else{
+                     Intent intent = new Intent(context, LoginActivity.class);
+                     context.startActivity(intent);
+                 }
 
              }
          });

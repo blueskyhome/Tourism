@@ -12,7 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.tourism.R;
+import com.example.tourism.activity.LoginActivity;
 import com.example.tourism.activity.user.HotelDetails;
+import com.example.tourism.tools.Global;
 import com.example.tourism.tools.user.Hotel;
 import com.example.tourism.tools.MyApplication;
 
@@ -54,11 +56,17 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.ViewHolder> 
         holder.hotelItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = holder.getAdapterPosition();
-                Hotel hotel = mHotelList.get(position);
-                Intent intent = new Intent(mContext, HotelDetails.class);
-                intent.putExtra("name", hotel.getName());
-                mContext.startActivity(intent);
+                if(Global.isLogin){
+                    int position = holder.getAdapterPosition();
+                    Hotel hotel = mHotelList.get(position);
+                    Intent intent = new Intent(mContext, HotelDetails.class);
+                    intent.putExtra("name", hotel.getName());
+                    mContext.startActivity(intent);
+                }else{
+                    Intent intent = new Intent(mContext, LoginActivity.class);
+                    mContext.startActivity(intent);
+                }
+
             }
         });
         return holder;

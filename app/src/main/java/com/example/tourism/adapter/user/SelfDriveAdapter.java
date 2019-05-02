@@ -18,7 +18,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import com.example.tourism.activity.LoginActivity;
 import com.example.tourism.activity.user.DriveDetailActivity;
+import com.example.tourism.tools.Global;
 import com.example.tourism.tools.user.Drive;
 import com.example.tourism.tools.MyApplication;
 
@@ -35,6 +37,7 @@ public class SelfDriveAdapter extends RecyclerView.Adapter<SelfDriveAdapter.View
         TextView hotelContent;
         TextView moneyText;
         LinearLayout linearLayout;
+        LinearLayout itemLayout;
         public ViewHolder(View view){
             super(view);
             coverImage = (ImageView)view.findViewById(R.id.self_drive_item_image_cover);
@@ -42,6 +45,7 @@ public class SelfDriveAdapter extends RecyclerView.Adapter<SelfDriveAdapter.View
             hotelContent = (TextView)view.findViewById(R.id.self_drive_item_text_house_content);
             linearLayout = (LinearLayout)view.findViewById(R.id.self_drive_spot_layout);
             moneyText = (TextView)view.findViewById(R.id.self_drive_item_text_money_context);
+            itemLayout = (LinearLayout)view.findViewById(R.id.self_drive_item);
         }
     }
     public SelfDriveAdapter(List<Drive> selfDriveList, Context context){
@@ -79,12 +83,18 @@ public class SelfDriveAdapter extends RecyclerView.Adapter<SelfDriveAdapter.View
             textView.setTextColor(Color.BLACK);
             viewHolder.linearLayout.addView(view1);
         }
-        viewHolder.coverImage.setOnClickListener(new View.OnClickListener() {
+        viewHolder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,DriveDetailActivity.class);
-                intent.putExtra("name",selfDrive.getTitle());
-                context.startActivity(intent);
+                if(Global.isLogin){
+                    Intent intent = new Intent(context,DriveDetailActivity.class);
+                    intent.putExtra("name",selfDrive.getTitle());
+                    context.startActivity(intent);
+                }else{
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    context.startActivity(intent);
+                }
+
             }
         });
     }

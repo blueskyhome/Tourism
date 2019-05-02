@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.tourism.R;
 import com.example.tourism.activity.LoginActivity;
+import com.example.tourism.activity.user.CommentActivity;
 import com.example.tourism.activity.user.OrderActivity;
 import com.example.tourism.activity.SettingActivity;
 import com.example.tourism.tools.Global;
@@ -24,6 +25,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
     private TextView name;
     private RelativeLayout layout;
     private View myOrder;
+    private View myComment;
 
     @Nullable
     @Override
@@ -40,6 +42,7 @@ public class MineFragment extends Fragment implements View.OnClickListener {
         settingImg = (ImageView) view.findViewById(R.id.setting_button);
         name = (TextView) view.findViewById(R.id.name);
         myOrder = (View) view.findViewById(R.id.my_order);
+        myComment = (View)view.findViewById(R.id.my_comment);
         layout = (RelativeLayout) view.findViewById(R.id.login_button);
         if (Global.isLogin) {
             if (Global.isManager) {
@@ -60,6 +63,18 @@ public class MineFragment extends Fragment implements View.OnClickListener {
                     Intent intent = new Intent(getActivity(), OrderActivity.class);
                     startActivity(intent);
                 } else {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        myComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Global.isLogin){
+                    Intent intent = new Intent(getActivity(), CommentActivity.class);
+                    startActivity(intent);
+                }else{
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
                 }
