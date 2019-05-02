@@ -176,7 +176,7 @@ public class DriveDetailActivity extends AppCompatActivity {
         tickerOrder.setThing_name(drive.getTitle());
         tickerOrder.setThing_number(mount);
         tickerOrder.setSingle_money(drive.getMoney());
-        tickerOrder.setMoney(money);
+        tickerOrder.setMoney(money*mount);
         tickerOrder.setIs_examine(false);
         tickerOrder.save(new SaveListener<String>() {
             @Override

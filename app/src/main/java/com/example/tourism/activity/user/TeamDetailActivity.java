@@ -172,7 +172,7 @@ public class TeamDetailActivity extends AppCompatActivity {
         tickerOrder.setThing_name(team.getTitle());
         tickerOrder.setThing_number(mount);
         tickerOrder.setSingle_money(team.getMoney());
-        tickerOrder.setMoney(money);
+        tickerOrder.setMoney(money*mount);
         tickerOrder.setIs_examine(false);
         tickerOrder.save(new SaveListener<String>() {
             @Override
